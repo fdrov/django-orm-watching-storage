@@ -1,10 +1,10 @@
-from django.shortcuts import render
 import django
-from datacenter.models import Passcard, Visit, get_duration, format_duration
+from django.shortcuts import render
+
+from datacenter.models import Visit, get_duration, format_duration
+
 
 def storage_information_view(request):
-    # Программируем здесь
-
     visits = Visit.objects.filter(leaved_at=None)
     non_closed_visits = []
     for visit in visits:
@@ -15,6 +15,6 @@ def storage_information_view(request):
         })
 
     context = {
-        "non_closed_visits": non_closed_visits,  # не закрытые посещения
+        "non_closed_visits": non_closed_visits,
     }
     return render(request, 'storage_information.html', context)

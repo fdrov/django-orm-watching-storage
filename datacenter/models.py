@@ -38,7 +38,7 @@ def get_stayed(visit):
     return visit.leaved_at - visit.entered_at
 
 
-def format_duration(duration: datetime.timedelta):
+def format_duration(duration):
     days, seconds = duration.days, duration.seconds
     hours = days * 24 + seconds // 3600
     minutes = (seconds % 3600) // 60
