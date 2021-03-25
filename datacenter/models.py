@@ -30,12 +30,10 @@ class Visit(models.Model):
 
 
 def get_duration(visit):
-    entered_at = django.utils.timezone.localtime(visit.entered_at)
-    return django.utils.timezone.localtime()-entered_at
-
-
-def get_stayed(visit):
-    return visit.leaved_at - visit.entered_at
+    if visit.leaved_at:
+        return visit.leaved_at - visit.entered_at
+    else:
+        return django.utils.timezone.localtime() - visit.entered_at
 
 
 def format_duration(duration):
@@ -45,13 +43,16 @@ def format_duration(duration):
     seconds = seconds % 60
     if days:
         return f'{days} д. {hours} ч. {minutes} мин.'
-    return f'{hours} ч. {minutes} мин.'
+    return f'{hours} ч. {minutes} мин. {seconds} сек.'
 
 
 def is_visit_long(visit, minutes=60):
     if visit.leaved_at:
-        duravion = (visit.leaved_at - visit.entered_at).total_seconds()
-        return duravion > (minutes * 60)
+        duration = (visit.leaved_at - visit.entered_at).total_seconds()
+        return duration > (minutes * 60)
+    else:
+        duration = (django.utils.timezone.localtime() - visit.entered_at).total_seconds()
+        return duration > (minutes * 60)
 
 
 def is_person_strange(any_visit):
