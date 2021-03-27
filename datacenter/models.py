@@ -47,19 +47,6 @@ def format_duration(duration):
 
 
 def is_visit_long(visit, minutes=60):
-    if visit.leaved_at:
-        duration = (visit.leaved_at - visit.entered_at).total_seconds()
-        return duration > (minutes * 60)
-    else:
-        duration = (django.utils.timezone.localtime() - visit.entered_at).total_seconds()
-        return duration > (minutes * 60)
+    duration = get_duration(visit).total_seconds()
+    return duration > (minutes * 60)
 
-
-def is_person_strange(any_visit):
-    all_person_visits = Visit.objects.filter(passcard__owner_name=any_visit.passcard.owner_name)
-    is_strange = False
-    for visit in all_person_visits:
-        if is_visit_long(visit):
-            is_strange = True
-            break
-    return is_strange
