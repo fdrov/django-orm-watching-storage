@@ -1,13 +1,24 @@
 import os
+from decouple import config
+
+ENGINE = config('ENGINE')
+HOST = config('HOST')
+PORT = config('PORT')
+NAME = config('NAME')
+USER = config('USER')
+PASSWORD = config('PASSWORD')
+DEBUG = config('DEBUG', cast=bool)
+
+print(DEBUG)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'checkpoint.devman.org',
-        'PORT': '5434',
-        'NAME': 'checkpoint',
-        'USER': 'guard',
-        'PASSWORD': 'osim5',
+        'ENGINE': ENGINE,
+        'HOST': HOST,
+        'PORT': PORT,
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
     }
 }
 
@@ -15,7 +26,7 @@ INSTALLED_APPS = ['datacenter']
 
 SECRET_KEY = 'REPLACE_ME'
 
-DEBUG = True
+DEBUG = False
 
 ROOT_URLCONF = "project.urls"
 
