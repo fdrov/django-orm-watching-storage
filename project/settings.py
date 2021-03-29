@@ -1,13 +1,6 @@
 import os
 from decouple import config, Csv
 
-ENGINE = config('ENGINE')
-HOST = config('HOST')
-PORT = config('PORT')
-NAME = config('NAME')
-USER = config('USER')
-PASSWORD = config('PASSWORD')
-
 
 DATABASES = {
     'default': {
