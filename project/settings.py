@@ -1,16 +1,9 @@
 import os
 from decouple import config, Csv
-
+from dj_database_url import parse as db_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': config('ENGINE'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD')
-    }
+    'default': config('DATABASE_URL', cast=db_url)
 }
 
 INSTALLED_APPS = ['datacenter']
