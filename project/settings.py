@@ -1,5 +1,5 @@
 import os
-from decouple import config
+from decouple import config, Csv
 
 ENGINE = config('ENGINE')
 HOST = config('HOST')
@@ -7,33 +7,31 @@ PORT = config('PORT')
 NAME = config('NAME')
 USER = config('USER')
 PASSWORD = config('PASSWORD')
-DEBUG = config('DEBUG', cast=bool)
 
-print(DEBUG)
 
 DATABASES = {
     'default': {
-        'ENGINE': ENGINE,
-        'HOST': HOST,
-        'PORT': PORT,
-        'NAME': NAME,
-        'USER': USER,
-        'PASSWORD': PASSWORD,
+        'ENGINE': config('ENGINE'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD')
     }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = 'REPLACE_ME'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = config('DEBUG', cast=bool)
 
 ROOT_URLCONF = "project.urls"
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = config('ALLOW_HOSTS', cast=Csv())
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
