@@ -21,7 +21,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ROOT_URLCONF = "project.urls"
 
-ALLOWED_HOSTS = config('ALLOW_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOW_HOSTS', default='127.0.0.1', cast=Csv())
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
